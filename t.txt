@@ -1,0 +1,64 @@
+
+    /**
+     * Carrega músicas de um arquivo e adiciona à árvore.
+     * O arquivo deve ter uma música por linha no formato:
+     * chave|artista|nomeMusica|letra
+     */
+    private static void carregarDeArquivo(String caminho, ArvoreB acervo) throws IOException {
+        try (BufferedReader leitor = new BufferedReader(new FileReader(caminho))) {
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+                String[] partes = linha.split("\\|");
+                int chave = Integer.parseInt(partes[0]);
+                String artista = partes[1];
+                String nomeMusica = partes[2];
+                String letra = partes[3];
+                Musica novaMusica = new Musica(chave, artista, nomeMusica, letra);
+                acervo.insere(novaMusica);
+            }
+        }
+    }
+
+    /**
+     * Busca músicas por artista na árvore e exibe os resultados.
+     */
+    private static void buscarPorArtista(String artista, ArvoreB acervo) {
+        System.out.println("Busca por artista não implementada diretamente na árvore B.");
+        // Adaptação necessária para varrer a árvore inteira.
+    }
+
+    /**
+     * Busca músicas por nome na árvore e exibe os resultados.
+     */
+    private static void buscarPorNomeMusica(String nomeMusica, ArvoreB acervo) {
+        System.out.println("Busca por nome de música não implementada diretamente na árvore B.");
+        // Adaptação necessária para varrer a árvore inteira.
+    }
+
+    /**
+     * Remove músicas por nome da música.
+     */
+    private static void removerPorNome(String nomeMusica, ArvoreB acervo) {
+        // Percorre a árvore e remove músicas que tenham o nome correspondente
+        System.out.println("Remover por nome da música não implementado diretamente na árvore B.");
+        // Adaptação necessária para varrer a árvore inteira e remover por nome
+    }
+
+    /**
+     * Remove músicas por artista.
+     */
+    private static void removerPorArtista(String artista, ArvoreB acervo) {
+        // Percorre a árvore e remove músicas que tenham o artista correspondente
+        System.out.println("Remover por artista não implementado diretamente na árvore B.");
+        // Adaptação necessária para varrer a árvore inteira e remover por artista
+    }
+
+    /**
+     * Remove músicas por letra.
+     */
+    private static void removerPorLetra(String letra, ArvoreB acervo) {
+        // Percorre a árvore e remove músicas que tenham a letra correspondente
+        System.out.println("Remover por letra não implementado diretamente na árvore B.");
+        // Adaptação necessária para varrer a árvore inteira e remover por letra
+    }
+}
