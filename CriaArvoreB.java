@@ -1,6 +1,8 @@
 package arvore;
+import arvoreB.ArvoreB;
+import arvoreB.Musica;
 import java.io.*;
-import arvore.*;
+
 public class CriaArvoreB {
 
   public static void main(String[] args) throws Exception {
@@ -60,13 +62,13 @@ public class CriaArvoreB {
         case 4: // Pesquisar por artista
           System.out.print("Digite o nome do artista para pesquisar: ");
           String buscaArtista = in.readLine();
-          buscarPorArtista(buscaArtista, acervo);
+          ArvoreB.buscarPorArtista(buscaArtista, acervo);
           break;
 
         case 5: // Pesquisar por nome da música
           System.out.print("Digite o nome da música para pesquisar: ");
           String buscaMusica = in.readLine();
-          buscarPorNomeMusica(buscaMusica, acervo);
+          ArvoreB.buscarPorNomeMusica(buscaMusica, acervo);
           break;
 
         case 6: // Imprimir árvore
@@ -84,19 +86,19 @@ public class CriaArvoreB {
         case 8: // Remover por nome da música
           System.out.print("Digite o nome da música para remover: ");
           String nomeMusicaRemover = in.readLine();
-          removerPorNome(nomeMusicaRemover, acervo);
+          ArvoreB.removerPorNome(nomeMusicaRemover, acervo);
           break;
 
         case 9: // Remover por artista
           System.out.print("Digite o nome do artista para remover: ");
           String artistaRemover = in.readLine();
-          removerPorArtista(artistaRemover, acervo);
+          ArvoreB.removerPorArtista(artistaRemover, acervo);
           break;
 
         case 10: // Remover por letra
           System.out.print("Digite a letra da música para remover: ");
           String letraRemover = in.readLine();
-          removerPorLetra(letraRemover, acervo);
+          ArvoreB.removerPorLetra(letraRemover, acervo);
           break;
 
         case 0: // Sair

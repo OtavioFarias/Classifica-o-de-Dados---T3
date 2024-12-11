@@ -1,14 +1,14 @@
-package arvore;
+package arvoreB;
 
 public class ArvoreB {
   private static class Pagina {
     int n;
-    Item r[];
+    Musica r[];
     Pagina p[];
 
     public Pagina(int mm) {
       this.n = 0;
-      this.r = new Item[mm];
+      this.r = new Musica[mm];
       this.p = new Pagina[mm + 1];
     }
   }
@@ -16,7 +16,7 @@ public class ArvoreB {
   private Pagina raiz;
   private int m, mm;
 
-  private void imprime(Pagina p, int nivel) {
+  public void imprime(Pagina p, int nivel) {
     if (p != null) {
       System.out.print("  Nivel" + nivel + ":");
       for (int i = 0; i < p.n; i++)
@@ -33,7 +33,7 @@ public class ArvoreB {
     }
   }
 
-  private Item pesquisa(Item reg, Pagina ap) {
+  public Musica pesquisa(Musica reg, Pagina ap) {
     if (ap == null)
       return null; // Registro @{\it n\~ao}@ econtrado
     else {
@@ -49,7 +49,7 @@ public class ArvoreB {
     }
   }
 
-  private void insereNaPagina(Pagina ap, Item reg, Pagina apDir) {
+  public void insereNaPagina(Pagina ap, Musica reg, Pagina apDir) {
     int k = ap.n - 1;
     while ((k >= 0) && (reg.compara(ap.r[k]) < 0)) {
       ap.r[k + 1] = ap.r[k];
@@ -61,7 +61,7 @@ public class ArvoreB {
     ap.n++;
   }
 
-  private Pagina insere(Item reg, Pagina ap, Item[] regRetorno,
+  public Pagina insere(Musica reg, Pagina ap, Musica[] regRetorno,
       boolean[] cresceu) {
     Pagina apRetorno = null;
     if (ap == null) {
@@ -106,7 +106,7 @@ public class ArvoreB {
     return (cresceu[0] ? apRetorno : ap);
   }
 
-  private boolean reconstitui(Pagina apPag, Pagina apPai, int posPai) {
+  public boolean reconstitui(Pagina apPag, Pagina apPai, int posPai) {
     boolean diminuiu = true;
     if (posPai < apPai.n) { // @{\it aux = P\'agina a direita de apPag}@
       Pagina aux = apPai.p[posPai + 1];
@@ -173,7 +173,7 @@ public class ArvoreB {
     return diminuiu;
   }
 
-  private boolean antecessor(Pagina ap, int ind, Pagina apPai) {
+  public boolean antecessor(Pagina ap, int ind, Pagina apPai) {
     boolean diminuiu = true;
     if (apPai.p[apPai.n] != null) {
       diminuiu = antecessor(ap, ind, apPai.p[apPai.n]);
@@ -186,7 +186,7 @@ public class ArvoreB {
     return diminuiu;
   }
 
-  private Pagina retira(Item reg, Pagina ap, boolean[] diminuiu) {
+  public Pagina retira(Musica reg, Pagina ap, boolean[] diminuiu) {
     if (ap == null) {
       System.out.println("Erro: Registro nao encontrado");
       diminuiu[0] = false;
@@ -226,12 +226,12 @@ public class ArvoreB {
     this.mm = 2 * m;
   }
 
-  public Item pesquisa(Item reg) {
+  public Musica pesquisa(Musica reg) {
     return this.pesquisa(reg, this.raiz);
   }
 
-  public void insere(Item reg) {
-    Item regRetorno[] = new Item[1];
+  public void insere(Musica reg) {
+    Musica regRetorno[] = new Musica[1];
     boolean cresceu[] = new boolean[1];
     Pagina apRetorno = this.insere(reg, this.raiz, regRetorno, cresceu);
     if (cresceu[0]) {
@@ -245,7 +245,7 @@ public class ArvoreB {
       this.raiz = apRetorno;
   }
 
-  public void retira(Item reg) {
+  public void retira(Musica reg) {
     boolean diminuiu[] = new boolean[1];
     this.raiz = this.retira(reg, this.raiz, diminuiu);
     if (diminuiu[0] && (this.raiz.n == 0)) { // @{\it \'Arvore diminui na altura}@
@@ -258,7 +258,7 @@ public class ArvoreB {
     this.imprime(this.raiz, 0);
   }
 
-  private void buscarPorLetra(String letra, ArvoreB acervo) {
+  public static void buscarPorLetra(String letra, ArvoreB acervo) {
     System.out.println("Busca por letra:");
 
     // Percorre a árvore e busca a música com a letra correspondente
@@ -273,7 +273,7 @@ public class ArvoreB {
     }
   }
 
-  private void buscarPorArtista(String artista, ArvoreB acervo) {
+  public static void buscarPorArtista(String artista, ArvoreB acervo) {
     System.out.println("Busca por artista:");
 
     // Percorre a árvore e busca o item com o nome do artista correspondente
@@ -291,7 +291,7 @@ public class ArvoreB {
   /**
    * Busca músicas por nome na árvore e exibe os resultados.
    */
-  private void buscarPorNomeMusica(String nomeMusica, ArvoreB acervo) {
+  public static void buscarPorNomeMusica(String nomeMusica, ArvoreB acervo) {
     System.out.println("Busca por nome da música:");
 
     // Percorre a árvore e busca o item com o nome da música correspondente
@@ -310,7 +310,7 @@ public class ArvoreB {
   /**
    * Remove músicas por nome da música.
    */
-  private void removerPorNome(String nomeMusica, ArvoreB acervo) {
+  public static void removerPorNome(String nomeMusica, ArvoreB acervo) {
     System.out.println("Remover por nome da música:");
 
     // Percorre a árvore e remove o item com o nome da música correspondente
@@ -330,7 +330,7 @@ public class ArvoreB {
   /**
    * Remove músicas por artista.
    */
-  private void removerPorArtista(String artista, ArvoreB acervo) {
+  public static void removerPorArtista(String artista, ArvoreB acervo) {
     System.out.println("Remover por artista:");
 
     // Percorre a árvore e remove músicas do artista
@@ -350,7 +350,7 @@ public class ArvoreB {
   /**
    * Remove músicas por letra.
    */
-  private void removerPorLetra(String letra, ArvoreB acervo) {
+  public static void removerPorLetra(String letra, ArvoreB acervo) {
     System.out.println("Remover por letra:");
 
     // Percorre a árvore e remove músicas com a letra correspondente
