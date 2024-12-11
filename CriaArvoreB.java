@@ -65,13 +65,13 @@ public class CriaArvoreB {
         case 4: // Pesquisar por artista
           System.out.print("Digite o nome do artista para pesquisar: ");
           String buscaArtista = in.readLine();
-          acervo.buscarPorArtista(buscaArtista);
+          ArvoreB.mostrarResultado(acervo.buscarPorArtista(buscaArtista));
           break;
 
         case 5: // Pesquisar por nome da música
           System.out.print("Digite o nome da música para pesquisar: ");
           String buscaMusica = in.readLine();
-          acervo.buscarPorNomeMusica(buscaMusica);
+          ArvoreB.mostrarResultado(acervo.buscarPorNomeMusica(buscaMusica));
           break;
 
         case 6: // Imprimir árvore

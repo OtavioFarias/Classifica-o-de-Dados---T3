@@ -451,5 +451,15 @@ public void removerPorNomeMusica(String nomeMusica) {
             }
         }
     }
+    public static void mostrarResultado(Musica[] resultado) {
+    if (resultado == null || resultado.length == 0) {
+        System.out.println("Nenhuma música encontrada.");
+        return;
+    }
+
+    for (Musica musica : resultado) {
+        System.out.println(musica);
+    }
+}
 }
 
