@@ -1,4 +1,7 @@
 package arvoreB;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.*;
 
 public class ArvoreB {
   private static class Pagina {
@@ -18,7 +21,7 @@ public class ArvoreB {
 
   public void imprime(Pagina p, int nivel) {
     if (p != null) {
-      System.out.print("  Nivel" + nivel + ":");
+      System.out.print("  Nivel " + nivel + ":");
       for (int i = 0; i < p.n; i++)
         System.out.print(" " + p.r[i].toString());
       System.out.println();
@@ -257,113 +260,196 @@ public class ArvoreB {
     System.out.println("ARVORE:");
     this.imprime(this.raiz, 0);
   }
-
-  public static void buscarPorLetra(String letra, ArvoreB acervo) {
-    System.out.println("Busca por letra:");
-
-    // Percorre a árvore e busca a música com a letra correspondente
-    Pagina p = acervo.raiz;
-    while (p != null) {
-      for (int i = 0; i < p.n; i++) {
-        if (p.r[i].getLetra().contains(letra)) { // Supondo que a letra é um texto
-          System.out.println("Música encontrada: " + p.r[i]);
-        }
-      }
-      // Continuar buscando nas páginas internas.
+public Musica[] buscarPorLetra(String letra, Pagina ap, List<Musica> resultado) {
+    if (ap == null) {
+        return resultado.toArray(new Musica[0]);
     }
-  }
-
-  public static void buscarPorArtista(String artista, ArvoreB acervo) {
-    System.out.println("Busca por artista:");
-
-    // Percorre a árvore e busca o item com o nome do artista correspondente
-    Pagina p = acervo.raiz;
-    while (p != null) {
-      for (int i = 0; i < p.n; i++) {
-        if (p.r[i].getArtista().equals(artista)) {
-          System.out.println("Música de " + artista + ": " + p.r[i]);
+    for (int i = 0; i < ap.n; i++) {
+        if (ap.r[i].getLetra().contains(letra)) {
+            resultado.add(ap.r[i]);
         }
-      }
-      // Continuar buscando nas páginas internas, se necessário.
+        buscarPorLetra(letra, ap.p[i], resultado);
     }
-  }
-
-  /**
-   * Busca músicas por nome na árvore e exibe os resultados.
-   */
-  public static void buscarPorNomeMusica(String nomeMusica, ArvoreB acervo) {
-    System.out.println("Busca por nome da música:");
-
-    // Percorre a árvore e busca o item com o nome da música correspondente
-    Pagina p = acervo.raiz;
-    while (p != null) {
-      for (int i = 0; i < p.n; i++) {
-        if (p.r[i].getNomeMusica().equals(nomeMusica)) {
-          System.out.println("Música encontrada: " + p.r[i]);
-        }
-      }
-      // Aqui, adicionar a lógica para descer na árvore se necessário
-      // De acordo com o nome da música e comparações.
-    }
-  }
-
-  /**
-   * Remove músicas por nome da música.
-   */
-  public static void removerPorNome(String nomeMusica, ArvoreB acervo) {
-    System.out.println("Remover por nome da música:");
-
-    // Percorre a árvore e remove o item com o nome da música correspondente
-    Pagina p = acervo.raiz;
-    while (p != null) {
-      for (int i = 0; i < p.n; i++) {
-        if (p.r[i].getNomeMusica().equals(nomeMusica)) {
-          // Remove o item da página
-          System.out.println("Removendo música: " + p.r[i]);
-          acervo.retira(p.r[i]); // Chama o método de remoção da árvore B
-        }
-      }
-      // Descer na árvore se necessário
-    }
-  }
-
-  /**
-   * Remove músicas por artista.
-   */
-  public static void removerPorArtista(String artista, ArvoreB acervo) {
-    System.out.println("Remover por artista:");
-
-    // Percorre a árvore e remove músicas do artista
-    Pagina p = acervo.raiz;
-    while (p != null) {
-      for (int i = 0; i < p.n; i++) {
-        if (p.r[i].getArtista().equals(artista)) {
-          // Remove o item da página
-          System.out.println("Removendo música de " + artista + ": " + p.r[i]);
-          acervo.retira(p.r[i]); // Chama o método de remoção da árvore B
-        }
-      }
-      // Descer na árvore se necessário
-    }
-  }
-
-  /**
-   * Remove músicas por letra.
-   */
-  public static void removerPorLetra(String letra, ArvoreB acervo) {
-    System.out.println("Remover por letra:");
-
-    // Percorre a árvore e remove músicas com a letra correspondente
-    Pagina p = acervo.raiz;
-    while (p != null) {
-      for (int i = 0; i < p.n; i++) {
-        if (p.r[i].getLetra().contains(letra)) {
-          // Remove o item da página
-          System.out.println("Removendo música com letra: " + p.r[i]);
-          acervo.retira(p.r[i]); // Chama o método de remoção da árvore B
-        }
-      }
-      // Descer na árvore se necessário
-    }
-  }
+    buscarPorLetra(letra, ap.p[ap.n], resultado);
+    return resultado.toArray(new Musica[0]);
 }
+
+public Musica[] buscarPorArtista(String artista, Pagina ap, List<Musica> resultado) {
+    if (ap == null) {
+        return resultado.toArray(new Musica[0]);
+    }
+    for (int i = 0; i < ap.n; i++) {
+        if (ap.r[i].getArtista().equals(artista)) {
+            resultado.add(ap.r[i]);
+        }
+        buscarPorArtista(artista, ap.p[i], resultado);
+    }
+    buscarPorArtista(artista, ap.p[ap.n], resultado);
+    return resultado.toArray(new Musica[0]);
+}
+
+public Musica[] buscarPorNomeMusica(String nomeMusica, Pagina ap, List<Musica> resultado) {
+    if (ap == null) {
+        return resultado.toArray(new Musica[0]);
+    }
+    for (int i = 0; i < ap.n; i++) {
+        if (ap.r[i].getNomeMusica().equals(nomeMusica)) {
+            resultado.add(ap.r[i]);
+        }
+        buscarPorNomeMusica(nomeMusica, ap.p[i], resultado);
+    }
+    buscarPorNomeMusica(nomeMusica, ap.p[ap.n], resultado);
+    return resultado.toArray(new Musica[0]);
+}
+
+public Musica[] buscarPorLetra(String letra) {
+    return buscarPorLetra(letra, this.raiz, new ArrayList<>());
+}
+
+public Musica[] buscarPorArtista(String artista) {
+    return buscarPorArtista(artista, this.raiz, new ArrayList<>());
+}
+
+public Musica[] buscarPorNomeMusica(String nomeMusica) {
+    return buscarPorNomeMusica(nomeMusica, this.raiz, new ArrayList<>());
+}
+
+public Pagina removerPorArtista(String artista, Pagina ap, boolean[] diminuiu) {
+    if (ap == null) {
+        diminuiu[0] = false;
+        return null;
+    }
+
+    // Percorrer as músicas na página
+    for (int i = 0; i < ap.n; i++) {
+        if (ap.r[i].getArtista().equals(artista)) {
+            // Música encontrada, removendo
+            System.out.println("Removendo música de " + artista + ": " + ap.r[i]);
+            ap = retira(ap.r[i], ap, diminuiu);
+            break;
+        }
+    }
+
+    // Recursivamente percorrendo os filhos
+    for (int i = 0; i <= ap.n; i++) {
+        ap.p[i] = removerPorArtista(artista, ap.p[i], diminuiu);
+    }
+    return ap;
+}
+
+public Pagina removerPorNomeMusica(String nomeMusica, Pagina ap, boolean[] diminuiu) {
+    if (ap == null) {
+        diminuiu[0] = false;
+        return null;
+    }
+
+    // Percorrer as músicas na página
+    for (int i = 0; i < ap.n; i++) {
+        if (ap.r[i].getNomeMusica().equals(nomeMusica)) {
+            // Música encontrada, removendo
+            System.out.println("Removendo música com nome: " + ap.r[i]);
+            ap = retira(ap.r[i], ap, diminuiu);
+            break;
+        }
+    }
+
+    // Recursivamente percorrendo os filhos
+    for (int i = 0; i <= ap.n; i++) {
+        ap.p[i] = removerPorNomeMusica(nomeMusica, ap.p[i], diminuiu);
+    }
+    return ap;
+}
+
+public void removerPorLetra(String letra) {
+    boolean diminuiu[] = new boolean[1];
+    this.raiz = removerPorLetra(letra, this.raiz, diminuiu);
+    if (diminuiu[0] && this.raiz.n == 0) {
+        this.raiz = this.raiz.p[0];
+    }
+}
+
+
+public void removerPorArtista(String artista) {
+    boolean diminuiu[] = new boolean[1];
+    this.raiz = removerPorArtista(artista, this.raiz, diminuiu);
+    if (diminuiu[0] && this.raiz.n == 0) {
+        this.raiz = this.raiz.p[0];
+    }
+}
+
+public void removerPorNomeMusica(String nomeMusica) {
+    boolean diminuiu[] = new boolean[1];
+    this.raiz = removerPorNomeMusica(nomeMusica, this.raiz, diminuiu);
+    if (diminuiu[0] && this.raiz.n == 0) {
+        this.raiz = this.raiz.p[0];
+    }
+}
+ // Método removerPorLetra
+    public Pagina removerPorLetra(String letra, Pagina ap, boolean[] diminuiu) {
+       if (ap == null) {
+        diminuiu[0] = false;
+        return null;
+    }
+
+    // Percorrer as músicas na página
+    for (int i = 0; i < ap.n; i++) {
+        if (ap.r[i].getLetra().equals(letra)) {
+            // Música encontrada, removendo
+            System.out.println("Removendo música com nome: " + ap.r[i]);
+            ap = retira(ap.r[i], ap, diminuiu);
+            break;
+        }
+    }
+
+    // Recursivamente percorrendo os filhos
+    for (int i = 0; i <= ap.n; i++) {
+        ap.p[i] = removerPorLetra(letra, ap.p[i], diminuiu);
+    }
+        return ap;
+
+}
+
+   // Função que carrega músicas de um arquivo CSV e insere na árvore B
+    public static void carregarMusicasDoCSV(ArvoreB acervo, String caminhoArquivoCSV) throws IOException {
+        BufferedReader reader = null;
+        String linha;
+        try {
+            // Abrir o arquivo CSV para leitura
+            reader = new BufferedReader(new FileReader(caminhoArquivoCSV));
+
+            // Ignorar o cabeçalho do arquivo CSV se houver (comente se não houver cabeçalho)
+            reader.readLine();
+
+            // Ler o arquivo linha por linha
+            while ((linha = reader.readLine()) != null) {
+                // Dividir a linha pelo delimitador de vírgula
+                String[] dados = linha.split(",");
+
+                // Verificar se a linha está bem formatada
+
+                    // Obter os dados
+                    String artista = dados[0].trim();
+                    int chave = Integer.parseInt(dados[1].trim());
+                    String nomeMusica = dados[2].trim();
+                    String letra = dados[3].trim();
+
+                    // Criar uma instância de Musica com os dados
+                    Musica musica = new Musica(chave, artista, nomeMusica, letra);
+
+                    // Inserir a música na árvore B
+                    acervo.insere(musica);
+
+            }
+
+            System.out.println("Músicas carregadas do arquivo com sucesso!");
+
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo CSV: " + e.getMessage());
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
+}
+

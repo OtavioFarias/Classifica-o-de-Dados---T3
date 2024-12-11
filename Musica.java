@@ -62,8 +62,8 @@ public class Musica {
     }
 
     public void leArq(RandomAccessFile arq) throws IOException {
-        this.chave = arq.readInt();
         this.artista = arq.readUTF();
+        this.chave = arq.readInt();
         this.nomeMusica = arq.readUTF();
         this.letra = arq.readUTF();
     }
