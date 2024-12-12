@@ -78,7 +78,7 @@ O projeto está dividido em três partes principais:
 
 - **Linguagem:** Java
 - **Bibliotecas/Recursos Usados:**
-  - Classes de entrada e saída (`BufferedReader`, `RandomAccessFile`).
+  - Classes de entrada e saída.
   - Estrutura de dados personalizada (Árvore B).
 
 ---
