@@ -18,11 +18,12 @@ public class CriaArvoreB {
       System.out.println("3 - Pesquisar por chave");
       System.out.println("4 - Pesquisar por artista");
       System.out.println("5 - Pesquisar por nome da música");
-      System.out.println("6 - Imprimir árvore");
-      System.out.println("7 - Remover por chave");
-      System.out.println("8 - Remover por nome da música");
-      System.out.println("9 - Remover por artista");
-      System.out.println("10 - Remover por letra");
+      System.out.println("6 - Pesquisar por letra da música");
+      System.out.println("7 - Imprimir árvore");
+      System.out.println("8 - Remover por chave");
+      System.out.println("9 - Remover por nome da música");
+      System.out.println("10 - Remover por artista");
+      System.out.println("11 - Remover por letra");
       System.out.println("0 - Sair");
       System.out.print("Escolha uma opção: ");
       int opcao = Integer.parseInt(in.readLine());
@@ -74,11 +75,17 @@ public class CriaArvoreB {
           ArvoreB.mostrarResultado(acervo.buscarPorNomeMusica(buscaMusica));
           break;
 
-        case 6: // Imprimir árvore
+        case 6: // Pesquisar por letra da música
+          System.out.print("Digite a letra da música para pesquisar: ");
+          String buscaLetra = in.readLine();
+          ArvoreB.mostrarResultado(acervo.buscarPorLetra(buscaLetra));
+        break;
+
+        case 7: // Imprimir árvore
           acervo.imprime();
           break;
 
-        case 7: // Remover por chave
+        case 8: // Remover por chave
           System.out.print("Digite a chave para remover: ");
           chave = Integer.parseInt(in.readLine());
           Musica itemParaRemover = new Musica(chave, "", "", "");
@@ -86,21 +93,21 @@ public class CriaArvoreB {
           System.out.println("Música removida.");
           break;
 
-        case 8: // Remover por nome da música
+        case 9: // Remover por nome da música
           System.out.print("Digite o nome da música para remover: ");
           String nomeMusicaRemover = in.readLine();
           acervo.removerPorNomeMusica(nomeMusicaRemover);
           System.out.println("Música removida.");
           break;
 
-        case 9: // Remover por artista
+        case 10: // Remover por artista
           System.out.print("Digite o nome do artista para remover: ");
           String artistaRemover = in.readLine();
           acervo.removerPorArtista(artistaRemover);
           System.out.println("Música removida.");
           break;
 
-        case 10: // Remover por letra
+        case 11: // Remover por letra
           System.out.print("Digite a letra da música para remover: ");
           String letraRemover = in.readLine();
           acervo.removerPorLetra(letraRemover);
