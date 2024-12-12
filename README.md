@@ -94,7 +94,7 @@ O projeto está dividido em três partes principais:
     - Para carregar o mesmo basta digitar o nome do arquivo que deseja carregar
    
 4. **Busca**
-   - Pesquisas rápidas e eficientes com base em:
+   - Pesquisas rápidas com base em:
      - Chave.
      - Nome do artista.
      - Nome da música.
