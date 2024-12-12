@@ -2,7 +2,7 @@ package arvoreB;
 
 import java.io.*;
 
-public class Musica {
+public class Musica { // Atributos privados que armazenam os dados de uma música
     private int chave;
     private String artista;
     private String nomeMusica;
@@ -60,7 +60,7 @@ public class Musica {
         arq.writeUTF(this.nomeMusica);
         arq.writeUTF(this.letra);
     }
-
+    
     public void leArq(RandomAccessFile arq) throws IOException {
         this.artista = arq.readUTF();
         this.chave = arq.readInt();
