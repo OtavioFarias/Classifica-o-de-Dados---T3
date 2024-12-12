@@ -88,22 +88,26 @@ O projeto está dividido em três partes principais:
 1. **Inserção**
    - Insere novas músicas, fornecendo os atributos necessários.
    - Suporta tanto inserção manual quanto por carregamento de arquivos.
-
-2. **Busca**
+     
+2. **Inserção pro arquivo**
+    - Na opção 2 do código é possível carregar o acervo de músicas seguindo o modelo apresentado anteriormente
+    - Para carregar o mesmo basta digitar o nome do arquivo que deseja carregar
+   
+4. **Busca**
    - Pesquisas rápidas e eficientes com base em:
      - Chave.
      - Nome do artista.
      - Nome da música.
      - Letra da música.
 
-3. **Remoção**
+5. **Remoção**
    - Permite excluir músicas utilizando diferentes critérios:
      - Chave.
      - Nome do artista.
      - Nome da música.
      - Letra da música.
 
-4. **Visualização**
+6. **Visualização**
    - Imprime a estrutura da Árvore B, mostrando como as músicas estão organizadas.
 
 ---
